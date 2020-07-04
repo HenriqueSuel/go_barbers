@@ -6,7 +6,7 @@ import BCryptHashProvider from './HashProviders/implementations/BCryptHashProvid
 
 
 container.registerSingleton<IHashProvider>(
-  'BCryptHashProvider', BCryptHashProvider
+  'HashProvider', BCryptHashProvider
   );
 
 
