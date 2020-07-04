@@ -28,16 +28,19 @@ class SendForgotPasswordEmailService {
     ) {}
 
   public async execute({ email }: IRequest): Promise<void> {
-
+    console.log('chegou')
     const user = await this.usersRepository.findByEmail(email);
 
     if (!user) {
       throw new AppError('Email address already used.', 400)
     }
 
-    await this.userTokensRepository.generate(user.id)
+    const { token } = await this.userTokensRepository.generate(user.id)
 
-    this.mailProviders.sendMail(email, 'Pedido de recuperação de senha recebido')
+    await this.mailProviders.sendMail(
+      email,
+      `Pedido de recuperação de senha recebido ${token}`
+      )
 
   }
 }

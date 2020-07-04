@@ -19,8 +19,9 @@ class CreateUserService {
   constructor(
     @inject('UsersRepository')
     private usersRepository: IUsersRepository,
-    @inject('BCryptyHashProvider')
-    private bcryptyHashProvider: IHashProvider
+
+    @inject('HashProvider')
+    private hashProvider: IHashProvider,
     ) {}
 
   public async execute({ name, email, password }: IRequest): Promise<User | undefined> {
@@ -30,7 +31,7 @@ class CreateUserService {
       throw new AppError('Email address already used.', 400)
     }
 
-    const hashedPassword = await this.bcryptyHashProvider.generateHash(password);
+    const hashedPassword = await this.hashProvider.generateHash(password);
 
 
     const user = await this.usersRepository.create({
