@@ -3,7 +3,8 @@ import { injectable, inject } from 'tsyringe';
 import AppError from '@shared/errors/AppError'
 
 import IUsersRepository from '../repositories/IUsersRepository';
-import User from '@modules/users/infra/typeorm/entities/User'
+import IUserTokenRepository from '../repositories/IUserTokenRepository';
+
 
 import IMailProviders from '@shared/container/providers/MailProviders/models/IMailProviders'
 
@@ -18,19 +19,25 @@ class SendForgotPasswordEmailService {
   constructor(
     @inject('UsersRepository')
     private usersRepository: IUsersRepository,
+
     @inject('MailProviders')
-    private mailProviders:IMailProviders
+    private mailProviders:IMailProviders,
+
+    @inject('userTokensRepository')
+    private userTokensRepository:IUserTokenRepository
     ) {}
 
   public async execute({ email }: IRequest): Promise<void> {
 
-    const checkUserExists = await this.usersRepository.findByEmail(email)t
+    const user = await this.usersRepository.findByEmail(email);
 
-    if (!checkUserExists) {
+    if (!user) {
       throw new AppError('Email address already used.', 400)
     }
 
-    this.mailProviders.sendMail(email, 'Teste henrique')
+    await this.userTokensRepository.generate(user.id)
+
+    this.mailProviders.sendMail(email, 'Pedido de recuperação de senha recebido')
 
   }
 }
