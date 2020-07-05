@@ -21,14 +21,13 @@ class SendForgotPasswordEmailService {
     private usersRepository: IUsersRepository,
 
     @inject('MailProvider')
-    private mailProviders:IMailProviders,
+    private mailProviders: IMailProviders,
 
     @inject('UserTokensRepository')
-    private userTokensRepository:IUserTokenRepository
-    ) {}
+    private userTokensRepository: IUserTokenRepository
+  ) { }
 
   public async execute({ email }: IRequest): Promise<void> {
-    console.log('chegou')
     const user = await this.usersRepository.findByEmail(email);
 
     if (!user) {
@@ -37,10 +36,20 @@ class SendForgotPasswordEmailService {
 
     const { token } = await this.userTokensRepository.generate(user.id)
 
-    await this.mailProviders.sendMail(
-      email,
-      `Pedido de recuperação de senha recebido ${token}`
-      )
+    await this.mailProviders.sendMail({
+      to: {
+        email: user.email,
+        name: user.name
+      },
+      subject: '[GoBaber] Recuperação de senha',
+      template: {
+        template: 'olá, {{name}} {{token}}',
+        variables: {
+          name: user.name,
+          token,
+        }
+      }
+    })
 
   }
 }
