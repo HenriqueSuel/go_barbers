@@ -1,8 +1,8 @@
-import FakeUsersRepository from '../repositories/fakes/FakeUsersRepository';
-import FakeHashProvider from '../providers/HashProviders/fakes/fakeHashProvider'
-import AuthenticateUserService from './AuthenticateUserService';
+import FakeUsersRepository from '../../repositories/fakes/FakeUsersRepository';
+import FakeHashProvider from '../../providers/HashProviders/fakes/fakeHashProvider'
+import AuthenticateUserService from '../AuthenticateUserService';
 import AppError from '@shared/errors/AppError'
-import CreateUserService from './CreateUserService';
+import CreateUserService from '../CreateUserService';
 
 
 let fakeUsersRepository:FakeUsersRepository;

@@ -1,10 +1,9 @@
-import CreateUserService from './CreateUserService';
 import AppError from '@shared/errors/AppError'
-import FakeHashProvider from '../providers/HashProviders/fakes/fakeHashProvider'
-import FakeUsersRepository from '../repositories/fakes/FakeUsersRepository';
+import FakeUsersRepository from '../../repositories/fakes/FakeUsersRepository';
 
-import UpdateUserAvatarService from './updateUserAvatarService'
-import FakeDiskStorageProvider from '../../../shared/container/providers/StorageProviders/fakes/FakeDiskStorageProvider';
+import UpdateUserAvatarService from '../updateUserAvatarService'
+import FakeDiskStorageProvider from '@shared/container/providers/StorageProviders/fakes/FakeDiskStorageProvider';
+
 
 let fakeUsersRepository: FakeUsersRepository;
 let fakeDiskStorageProvider: FakeDiskStorageProvider;

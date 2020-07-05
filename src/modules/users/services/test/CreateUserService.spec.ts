@@ -1,7 +1,7 @@
-import FakeUsersRepository from '../repositories/fakes/FakeUsersRepository';
-import CreateUserService from './CreateUserService';
+import FakeUsersRepository from '../../repositories/fakes/FakeUsersRepository';
+import CreateUserService from '../CreateUserService';
 import AppError from '@shared/errors/AppError'
-import FakeHashProvider from '../providers/HashProviders/fakes/fakeHashProvider'
+import FakeHashProvider from '../../providers/HashProviders/fakes/fakeHashProvider'
 
 let fakeUsersRepository: FakeUsersRepository
 let fakeHashProvider: FakeHashProvider
