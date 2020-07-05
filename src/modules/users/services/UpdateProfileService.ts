@@ -24,7 +24,7 @@ class UpdateProfile {
 
   public async execute({ email, name, user_id, old_password, password }: IRequest): Promise<User | undefined> {
     const user = await this.usersRepository.findById(user_id);
-    console.log('chegouuuu')
+
     if (!user) {
       throw new AppError('User not found.');
     }
