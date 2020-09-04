@@ -11,7 +11,7 @@ describe('ListProviderMonthAvailability', () => {
     listProviderMonthAvailabilityService = new ListProviderMonthAvailabilityService(fakeAppointmentsRepository);
   });
 
-  it('should be able to list the month availability from provider', async () => {
+  it.only('should be able to list the month availability from provider', async () => {
 
     for(let index = 8; index <= 17; index++) {
       await fakeAppointmentsRepository.create({

@@ -1,4 +1,4 @@
-import AppError from '@shared/errors/AppError';
+/* import AppError from '@shared/errors/AppError';
 import FakeAppointmentsRepository from '../../repositories/fakes/FakeAppointmentsRepository';
 import ListProviderAppointmentsService from '../ListProviderAppointmentsService';
 
@@ -37,3 +37,4 @@ describe('ListProviderAppointments', () => {
   });
 
 });
+ */
