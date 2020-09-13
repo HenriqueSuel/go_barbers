@@ -42,7 +42,10 @@ class CreatedAppointmentService {
       throw new AppError("You can't create an appointemnt on a past date", 400)
     }
 
-    const findAppointmentInSameDate = await this.appointmentsRepository.findByDate(appointmentDate)
+    const findAppointmentInSameDate = await this.appointmentsRepository.findByDate(
+      appointmentDate,
+      provider_id
+      )
 
     if (findAppointmentInSameDate) {
       throw new AppError('This appointment is already blooked', 400)
